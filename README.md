@@ -9,7 +9,9 @@ On a Lightning record page (for example, an Opportunity), a small magnifying gla
 1. **The formula** — e.g. `Amount * Days_In_Stage__c`
 2. **The same formula with today’s values** — e.g. `100 * 5`
 
-The extension **substitutes** field values into the formula text. It does not calculate the final result. For formulas with `IF()` or `CASE()`, you see the branch that applies to this record with real values, not a single computed number.
+The extension **substitutes** field values into the formula text. It does not calculate the final result. For formulas with `IF()` or `CASE()`, you see the branch that applies to this record with real values, not a single computed number.[
+
+Demo Video Link Here](https://www.loom.com/share/5ec574c0955c46e8874301d7b812e831)
 
 ## Requirements
 
