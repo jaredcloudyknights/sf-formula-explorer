@@ -78,3 +78,5 @@ All processing happens in your browser. The extension does not send data to any 
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+JMJ
