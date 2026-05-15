@@ -1,0 +1,226 @@
+/* All extension styles are scoped under the sffi- prefix.
+ *
+ * The popover root uses `all: initial` to firewall against Salesforce's
+ * global CSS, then re-establishes every property explicitly. We don't do
+ * the same on the icon because it lives inside the page's own layout and
+ * benefits from inheriting the field's color (so it blends visually).
+ */
+
+/* ── Icon ──────────────────────────────────────────────────────────────── */
+
+.sffi-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-left: 6px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #0070d2;
+  cursor: pointer;
+  vertical-align: middle;
+  border-radius: 3px;
+  transition: background-color 120ms ease;
+}
+
+.sffi-icon svg {
+  display: block;
+  pointer-events: none;
+}
+
+.sffi-icon:hover,
+.sffi-icon:focus-visible {
+  background-color: rgba(0, 112, 210, 0.12);
+  outline: none;
+}
+
+.sffi-icon--pending {
+  color: #aaa;
+  animation: sffi-pulse 1.2s ease-in-out infinite;
+}
+
+.sffi-icon--error {
+  color: #c23934;
+}
+
+@keyframes sffi-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 1; }
+}
+
+/* ── Popover ───────────────────────────────────────────────────────────── */
+
+.sffi-popover {
+  /* Firewall: reset everything, then explicitly set what we want. */
+  all: initial;
+
+  position: absolute;
+  z-index: 2147483000; /* above Salesforce's modal layers */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 440px;
+  max-width: calc(100vw - 24px);
+  /* Cap to the viewport so very long formulas / lots of refs don't push the
+   * popover off-screen. The inner __body wraps the scrollable middle so the
+   * header and footer-result stay pinned. */
+  max-height: calc(100vh - 24px);
+  padding: 0;
+
+  background: #ffffff;
+  color: #16325c;
+  border: 1px solid #d8dde6;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+
+  font-family: "Salesforce Sans", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.sffi-popover__body {
+  flex: 1 1 auto;
+  min-height: 0; /* allow children to shrink so overflow-y works */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sffi-popover * {
+  /* Defensive: child elements get a known starting point too. */
+  box-sizing: border-box;
+  font-family: inherit;
+  color: inherit;
+}
+
+.sffi-popover__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px 8px;
+  border-bottom: 1px solid #ecebea;
+  flex: 0 0 auto;
+}
+
+.sffi-popover__title {
+  flex: 1;
+  font-weight: 600;
+  font-size: 14px;
+  color: #16325c;
+}
+
+.sffi-popover__subtitle {
+  display: block;
+  font-weight: 400;
+  font-size: 11px;
+  color: #6b778c;
+  margin-top: 2px;
+}
+
+.sffi-popover__title > .sffi-popover__subtitle {
+  display: block;
+}
+
+.sffi-popover__close {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #6b778c;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  border-radius: 3px;
+}
+
+.sffi-popover__close:hover {
+  background: #f3f3f3;
+  color: #16325c;
+}
+
+.sffi-popover__section {
+  padding: 10px 12px;
+  border-bottom: 1px solid #ecebea;
+}
+
+.sffi-popover__section:last-of-type {
+  border-bottom: none;
+}
+
+.sffi-popover__sectionLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #6b778c;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.sffi-popover__code {
+  margin: 0;
+  padding: 8px 10px;
+  background: #f4f6f9;
+  border-radius: 4px;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #16325c;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.sffi-popover__value {
+  background: #d8e6f6;
+  color: #0050a0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+.sffi-popover__missing {
+  background: #fde2e2;
+  color: #a01010;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-style: italic;
+  font-size: 11px;
+}
+
+.sffi-popover__result {
+  padding: 10px 12px;
+  font-size: 12px;
+  color: #16325c;
+  background: #f9fafb;
+  border-top: 1px solid #ecebea;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  flex: 0 0 auto;
+}
+
+.sffi-popover__resultLabel {
+  font-weight: 600;
+  color: #6b778c;
+}
+
+.sffi-popover__resultValue {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+}
+
+.sffi-popover__error {
+  padding: 8px 10px;
+  background: #fde2e2;
+  color: #a01010;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.sffi-popover__note {
+  padding: 8px 10px;
+  background: #fff8e1;
+  color: #6b5b00;
+  border-radius: 4px;
+  font-size: 12px;
+}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Salesforce Formula Explorer</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="header">
+      <div class="title">Salesforce Formula Explorer</div>
+    </div>
+    <div class="body">
+      <button id="activate" class="primary" type="button" disabled>
+        Explore formulas on this page
+      </button>
+      <div id="status" class="status"></div>
+      <label class="toggleRow">
+        <input id="alwaysOn" type="checkbox" />
+        <span>Always on for Salesforce record pages</span>
+      </label>
+      <div class="hint">
+        When off (default), click this button on each record page to surface
+        formula icons. When on, icons appear automatically.
+      </div>
+    </div>
+    <script src="popup.js" type="module"></script>
+  </body>
+</html>

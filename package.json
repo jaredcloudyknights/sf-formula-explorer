@@ -1,0 +1,15 @@
+{
+  "name": "salesforce-formula-explorer",
+  "version": "0.1.0",
+  "description": "Chrome extension that reveals Salesforce formula sources and substituted values inline on Lightning record pages.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/",
+    "icons": "node scripts/make-icons.js",
+    "zip": "node scripts/zip.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

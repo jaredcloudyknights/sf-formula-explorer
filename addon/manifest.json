@@ -1,0 +1,71 @@
+{
+  "manifest_version": 3,
+  "name": "Salesforce Formula Explorer",
+  "version": "0.1.0",
+  "description": "Reveal the source of Salesforce formula fields inline, with the current record's values substituted in.",
+  "permissions": ["cookies", "storage", "scripting"],
+  "host_permissions": [
+    "https://*.lightning.force.com/*",
+    "https://*.develop.lightning.force.com/*",
+    "https://*.my.salesforce.com/*",
+    "https://*.develop.my.salesforce.com/*",
+    "https://*.sandbox.lightning.force.com/*",
+    "https://*.sandbox.my.salesforce.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.lightning.force.com/*",
+        "https://*.develop.lightning.force.com/*",
+        "https://*.sandbox.lightning.force.com/*",
+        "https://*.my.salesforce.com/*",
+        "https://*.sandbox.my.salesforce.com/*"
+      ],
+      "js": ["content/content.js"],
+      "css": ["styles/content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "content/url-parser.js",
+        "content/dom-walker.js",
+        "content/icon.js",
+        "content/popover.js",
+        "lib/api.js",
+        "lib/formula-parser.js",
+        "lib/formula-substitute.js"
+      ],
+      "matches": [
+        "https://*.lightning.force.com/*",
+        "https://*.develop.lightning.force.com/*",
+        "https://*.sandbox.lightning.force.com/*",
+        "https://*.my.salesforce.com/*",
+        "https://*.sandbox.my.salesforce.com/*"
+      ]
+    }
+  ],
+  "commands": {
+    "activate": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F"
+      },
+      "description": "Explore formulas on this page"
+    }
+  },
+  "action": {
+    "default_title": "Salesforce Formula Explorer",
+    "default_popup": "popup/popup.html"
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  }
+}
